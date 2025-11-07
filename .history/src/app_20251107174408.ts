@@ -4,9 +4,8 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import { router } from "./app/modules/routes";
-
+import httpStatus from "http-status-codes";
 import { globalErrorHangler } from "./app/middlewares/globalErrorHandeler";
-import notFound from "./app/middlewares/notFound";
 
 const app = express();
 
@@ -25,6 +24,11 @@ app.get("/", (req: Request, res: Response) => {
 app.use(globalErrorHangler);
 
 // Not Found route handler
-app.use(notFound);
+app.use((req: Request, res: Response) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    success: false,
+    message: "API route not found!",
+  });
+});
 
 export default app;

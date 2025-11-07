@@ -1,5 +1,3 @@
-import { Types } from "mongoose";
-
 export enum Role{
     SUPER_ADMIN = "SUPER_ADMIN",
     USER="USER",
@@ -25,11 +23,9 @@ export interface Iuser{
     picture?:string;
     address?:string;
     isDeleted?:string;
-    isActive?:IsActive;
+    isActive?:string;
     isVerified?:string;
     role:Role
     auths:IauthProvider[]
-    bookings?:Types.ObjectId[]
-    guides?:Types.ObjectId[]
    
 }

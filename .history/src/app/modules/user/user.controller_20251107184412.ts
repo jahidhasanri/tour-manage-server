@@ -3,8 +3,6 @@ import { NextFunction, Request, Response } from "express";
 
 import { UserServices } from "./user.service";
 import { catchAsync } from "../../utils/catchAsync";
-import { sendResponse } from "../../utils/sendResponse";
-
 
 
 
@@ -34,22 +32,19 @@ const CreateUser =catchAsync(async(req:Request,res:Response, next:NextFunction)=
 })
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const getAllUsers =catchAsync(async(req:Request,res:Response, next:NextFunction)=>{
- const users= await UserServices.getAllUsers();
-//  res.status(201).json({
-//             success:true,
-//             message:"all users retrieved successfully",
-//             data:users
-//         })
-sendResponse(res,{
-    statusCode:200,
-    message:"all users retrieved successfully",
-    success:true,
-    data:users,
-    
-})
-}) 
+
+
+
+
+const getAllUsers = async(req:Request,res:Response, next:NextFunction)=>{
+    try {
+        const users= await UserServices.getAllUsers();
+        return users;
+    } catch (err) {
+        console.log(err);
+        next(err) ;
+    }
+}
 
 export const userConterolers ={
     CreateUser,

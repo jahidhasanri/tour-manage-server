@@ -1,0 +1,15 @@
+
+import express, { Request, Response } from "express"
+import { UserRoutes } from "./app/modules/user/user.router";
+import cors from "cors"
+const app = express();
+app.use(express.json())
+app.use(cors())
+app.use('/api/vi/user',UserRoutes)
+app.get ("/",(req:Request,res:Response)=>{
+    res.status(200).json({
+        message:"welcome to tour management system backend"
+    })
+})
+
+export default app;

@@ -1,14 +1,6 @@
-import { model, Schema } from "mongoose";
-import { IauthProvider, IsActive, Iuser, Role } from "./user.interface";
+import { Schema } from "mongoose";
+import { IsActive, Iuser, Role } from "./user.interface";
 
-
-const authProvidersSchema = new Schema<IauthProvider>({
-   provider:{type:String,required:true},
-   providerId:{type:String,required:true}
-},{
-    versionKey:false,
-    _id:false
-})
 
 const UserSchema = new Schema<Iuser>({
     name:{type:String,required:true},
@@ -29,11 +21,8 @@ const UserSchema = new Schema<Iuser>({
         default:IsActive.ACTIVE
     },
     isVerified:{type:Boolean,default:false},
-    auths:[authProvidersSchema],
 },
 {
     timestamps:true,
     versionKey:false
 })
-
-export const User = model<Iuser>("User",UserSchema)
